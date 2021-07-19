@@ -1,0 +1,30 @@
+<div class="card pt-3 pb-3 animated fadeIn fast" *ngIf="detalleProducto">
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <img [src]="img" [alt]="detalleProducto.title" />
+    </div>
+    <div class="col pt-3">
+      <span>{{ condicionProducto }} - {{detalleProducto.sold_quantity}} vendidos</span>
+
+      <div class="mt-2 mb-4">
+        <h3>{{ detalleProducto.title }}</h3>
+      </div>
+      <div class="mb-5">
+        <h2>{{ detalleProducto.price | currency }}</h2>
+      </div>
+      <div>
+        <button class="btn btn-primary btn-comprar">Comprar</button>
+      </div>
+    </div>
+  </div>
+  <div class="row pl-3" style="margin-top: 100px">
+    <div class="col-8 description">
+      <h3>Descripción del producto</h3>
+
+      <div>
+        {{ descripcionProducto?.plain_text }}
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

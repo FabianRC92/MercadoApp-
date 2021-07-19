@@ -1,0 +1,34 @@
+.divSearch {
+  background-color: var(--yellow);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  text-align: center;
+  height: 60px;
+}
+
+.btn-search {
+  background-color: var(--light-grey);
+}
+
+.col1 {
+  float: left;
+  width: 8%;
+}
+.col2 {
+  float: left;
+  width: 92%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.sizeText{
+  width: 91% !important;
+}
+

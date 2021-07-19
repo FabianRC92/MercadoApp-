@@ -1,0 +1,16 @@
+.thumbnail {
+  height: 160px;
+  border-radius: 4px;
+  max-width: 200px;
+}
+
+.divState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.state_name{
+    color: var(--grey);
+
+}

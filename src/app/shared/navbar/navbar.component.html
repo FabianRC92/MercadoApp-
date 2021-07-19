@@ -1,0 +1,37 @@
+<div class="divSearch">
+  <div class="row">
+    <div class="col1 mt-2"></div>
+    <div class="col2">
+      <form
+        [formGroup]="searchForm"
+        autocomplete="off"
+        (ngSubmit)="searchProduct()"
+      >
+        <div class="input-group mt-2 sizeText">
+          <span class="input-group-addon">
+            <img
+              srcset="assets/img/Logo_ML.png, assets/img/Logo_ML@2x.png"
+              alt="logo"
+              style="margin-right: 2rem; cursor: pointer"
+              routerLink="/home"
+            />
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="producto"
+            placeholder="Nunca dejes de buscar"
+          />
+          <span class="input-group-append">
+            <button class="btn btn-search border-start-0 border" type="submit">
+              <img
+                srcset="assets/img/ic_Search.png, assets/img/ic_Search@2x.png"
+                alt="search"
+              />
+            </button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
