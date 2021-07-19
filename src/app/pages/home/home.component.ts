@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * @param idProducto id del producto
    */
   detalleProducto(idProducto: string) {
-    this.router.navigate(['../detalle', idProducto]);
+    this.router.navigate(['../items', idProducto]);
   }
 
 }
