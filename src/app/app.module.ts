@@ -14,13 +14,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { appReducers } from './store/app.reducer';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
     DetalleProductoComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent    
   ],
   imports: [
     BrowserModule,

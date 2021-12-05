@@ -4,9 +4,11 @@ import { DetalleProductoComponent } from './pages/detalle-producto/detalle-produ
 import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+ 
+  { path: '', component: HomeComponent },
   { path: 'items/:id', component: DetalleProductoComponent },
-  { path: '**', redirectTo: 'home' }
+  { path: '**', redirectTo: '' }
+
 ];
 
 

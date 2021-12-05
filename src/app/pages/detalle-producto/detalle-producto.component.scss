@@ -3,8 +3,12 @@
   height: 48px;
 }
 
+.container-detail {
+  width: 60%;
+}
 
-.description{
-    padding: 0 0 30px 60px;
-    text-align: justify;
+@media (max-width: 1024px) {
+  .container-detail {
+    width: 100%;
+  }
 }

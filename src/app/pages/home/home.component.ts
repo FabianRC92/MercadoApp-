@@ -1,11 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { ProductModel } from 'src/app/models/product.model';
+import { ItemsModel } from 'src/app/models/items.model';
 import { ProductService } from 'src/app/services/product.service';
-import { unsetBread } from 'src/app/store/actions';
-
 import { AppState } from 'src/app/store/app.reducer';
 
 
@@ -18,7 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   private productoSubscription: Subscription = new Subscription();
-  public listProducts: ProductModel[] = [];
+  public listProducts: ItemsModel[] = [];
 
   constructor(private productService: ProductService,
     private router: Router,
@@ -34,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.productoSubscription = this.store.select('producto').subscribe(({ producto }) => {
       this.listProducts = producto;
-    });  
+    });
 
   }
 

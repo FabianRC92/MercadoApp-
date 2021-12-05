@@ -1,18 +1,25 @@
 <div class="card animated fadeIn" *ngIf="listProducts.length > 0">
-  <ul class="list-group list-group-flush" *ngFor="let item of listProducts">
-    <li class="list-group-item" style="cursor: pointer" (click)="detalleProducto(item.id)">
+  <ul
+    class="list-group list-group-flush"
+    *ngFor="let item of listProducts.slice(0, 4)"
+  >
+    <li
+      class="list-group-item"
+      style="cursor: pointer"
+      (click)="detalleProducto(item.id)"
+    >
       <div class="row">
-        <div class="col-2 col-sm-2 " style="text-align: center;">
-          <img [src]="item.thumbnail" [alt]="item.title" class="thumbnail" />
+        <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12" style="text-align: center">
+          <img [src]="item.picture" [alt]="item.title" class="thumbnail" />
         </div>
-        <div class="col col-sm">
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
           <h3 class="pt-4">
-            {{ item.price | currency }}
+            {{ item.price.amount | currency }}
             <span>
               <img
                 srcset="assets/img/ic_shipping.png, assets/img/ic_shipping@2x"
                 alt="free_shipping"
-                *ngIf="item.shipping.free_shipping"
+                *ngIf="item.free_shipping"
               />
             </span>
           </h3>
@@ -20,9 +27,9 @@
             {{ item.title }}
           </div>
         </div>
-        <div class="col col-sm d-flex justify-content-center">
+        <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12 p-3">
           <p class="state_name align-self-center">
-            {{ item.address.state_name }}
+            {{ item.state }}
           </p>
         </div>
       </div>

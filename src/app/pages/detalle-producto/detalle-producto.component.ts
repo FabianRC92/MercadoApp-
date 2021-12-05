@@ -2,11 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { AttributesModel } from 'src/app/models/attributes.model';
-import { ProductDetailModel } from 'src/app/models/product.detail';
-import { ProductDetailDescriptionModel } from 'src/app/models/product.detail.description';
+import { ItemsModel } from 'src/app/models/items.model';
 import { ProductService } from 'src/app/services/product.service';
-import { setBread, unsetBread } from 'src/app/store/actions';
+import { setBread } from 'src/app/store/actions';
 import { AppState } from 'src/app/store/app.reducer';
 
 @Component({
@@ -19,11 +17,8 @@ export class DetalleProductoComponent implements OnInit, OnDestroy {
   private idProducto: string = '';
   private breadSubscription: Subscription = new Subscription();
   private bread: string = '';
-  private breadCopy: string = '';
-  public img: string = ''
-  public condicionProducto: string = '';
-  public detalleProducto!: ProductDetailModel;
-  public descripcionProducto!: ProductDetailDescriptionModel;
+  private breadCopy: string = '';  
+  public detalleProducto!: ItemsModel;
 
   constructor(private route: ActivatedRoute,
     private productService: ProductService,
@@ -33,7 +28,7 @@ export class DetalleProductoComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     const bread = this.breadCopy;
     this.store.dispatch(setBread({ bread }))
-    this.breadSubscription.unsubscribe();   
+    this.breadSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -43,8 +38,7 @@ export class DetalleProductoComponent implements OnInit, OnDestroy {
       this.bread = bread;
     });
 
-    this.detailProduct();
-    this.descriptionProduct();
+    this.detailProduct();  
     this.breadCopy = this.bread;
 
   }
@@ -55,40 +49,14 @@ export class DetalleProductoComponent implements OnInit, OnDestroy {
    */
   detailProduct() {
 
-    this.productService.detailProduct(this.idProducto, '').subscribe(
+    this.productService.detailProduct(this.idProducto).subscribe(
       data => {
         this.detalleProducto = data;
-        this.img = this.detalleProducto.pictures[0].url;
         const bread: string = this.bread + this.detalleProducto.title;
         this.store.dispatch(setBread({ bread }))
-        this.getCondicionProducto(this.detalleProducto.attributes);
+
       }
     )
-  }
-
-
-  /**
-   * @description llama servicio descripción produco
-   */
-  descriptionProduct() {
-    this.productService.detailProduct(this.idProducto, 'description').subscribe(
-      data => {
-        this.descripcionProducto = data;
-      }
-    )
-
-  }
-
-
-  /**
-   * @description obtiene el valor de la condición del producto
-   * @param attributes array de tipo attributes
-   */
-  getCondicionProducto(attributes: AttributesModel[]) {
-
-    const itemCondition = attributes.filter(d => d.id === 'ITEM_CONDITION')[0];
-    this.condicionProducto = itemCondition.value_name;
-
   }
 
 }

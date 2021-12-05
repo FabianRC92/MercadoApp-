@@ -1,12 +1,11 @@
-import { ProductModel } from "./product.model";
-import { CategoryModel } from './category.model';
+import { AutorModel } from "./autor.model";
+import { CategoryModel } from "./category.model";
+import { ItemsModel } from "./items.model";
 
-export interface QueryModel{
+export interface QueryModel {
 
-    site_id: string;
-    query: string;
-    paging: any;
-    results:ProductModel[];
-    available_filters: CategoryModel[];
-    filters: CategoryModel[];
+    autor: AutorModel;
+    items: ItemsModel[];
+    categories:CategoryModel[];
+
 }

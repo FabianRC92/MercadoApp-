@@ -1,9 +1,9 @@
 import { createReducer, on } from "@ngrx/store";
-import { ProductModel } from "src/app/models/product.model";
+import { ItemsModel } from "src/app/models/items.model";
 import * as actions from '../actions/products.actions'
 
 export interface ProductoState {
-    producto: ProductModel[]
+    producto: ItemsModel[]
 }
 
 export const ProductoInitialState: ProductoState = {

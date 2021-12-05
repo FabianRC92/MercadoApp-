@@ -4,7 +4,6 @@ import { NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { CategoryModel } from 'src/app/models/category.model';
-import { ProductModel } from 'src/app/models/product.model';
 import { QueryModel } from 'src/app/models/query.model';
 import { ProductService } from 'src/app/services/product.service';
 import * as actions from 'src/app/store/actions';
@@ -39,7 +38,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.routerSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
-        if (event.url !== "/home") {
+        if (event.url !== '/') {
           this.searchForm.disable()
         } else {
           this.searchForm.enable();
@@ -59,7 +58,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       const { producto } = this.searchForm.value;
 
       this.productService.getProducts(producto).subscribe((data: QueryModel) => {
-        if (data.results.length > 0) {
+        if (data.items.length > 0) {
 
           this.emitirInformacion(data);
         }
@@ -74,20 +73,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
    */
   emitirInformacion(objQuery: QueryModel) {
 
-    const categoryAv = objQuery.available_filters.filter(f => f.id === 'category').length;
-    let category: CategoryModel[] = [];
-    let producto: ProductModel[] = objQuery.results;
 
-    if (categoryAv > 0) {
-      category = objQuery.available_filters.filter(f => f.id === 'category');
-    } else {
-      category = objQuery.filters.filter(f => f.id === 'category');
-    }
+    const category = objQuery.categories;
+    const producto = objQuery.items;
 
     this.store.dispatch(actions.setProductos({ producto }));
     this.getBreadCrumb(category);
-    this.searchForm.reset();
-    this.router.navigate(['/home']);
 
   }
 
@@ -104,7 +95,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
       category.filter(ct => {
 
-        const mayor = ct.values.sort((a, b) => b.results - a.results)[0];
+        const mayor = ct.values.sort((a: any, b: any) => b.results - a.results)[0];
 
         if (!mayor.path_from_root) {
           bread = mayor.name + ' > ';
@@ -112,7 +103,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
           ct.values.forEach(v => {
             if (v.path_from_root) {
-              v.path_from_root.forEach(pf => bread += pf.name + ' > ');
+              v.path_from_root.forEach((pf: any) => bread += pf.name + ' > ');
             }
           });
 
